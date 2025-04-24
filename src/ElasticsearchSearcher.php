@@ -163,11 +163,10 @@ final class ElasticsearchSearcher implements SearcherInterface
             );
 
             foreach ($highlightFields as $highlightField) {
+                //if only one of the fields matches, the highlight will not be in all fields.
                 \assert(
                     isset($hit['highlight'])
-                    && \is_array($hit['highlight'])
-                    && isset($hit['highlight'][$highlightField])
-                    && \is_array($hit['highlight'][$highlightField]),
+                    && \is_array($hit['highlight'])),
                     'Expected highlight field to be set.',
                 );
 
